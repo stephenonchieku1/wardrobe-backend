@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('clothing_items', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('category');
+            $table->string('brand');
+            $table->string('size');           
+            $table->string('image') -> nullable();
+                
             $table->timestamps();
         });
     }
