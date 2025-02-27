@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('category');
             $table->string('brand');
-            $table->string('size');           
-            $table->string('image') -> nullable();
-                
+            $table->string('size');
+            $table->string('description') -> nullable();
+
             $table->timestamps();
         });
     }
