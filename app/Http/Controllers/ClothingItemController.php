@@ -7,59 +7,37 @@ use Illuminate\Http\Request;
 
 class ClothingItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index() {
+        return ClothingItem::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+        'name' => 'required|string|max:255',
+        'brand' => 'required|string|max:255',
+        'size' => 'required|string|max:255',
+        'category' => 'required|string|max:255',
+        'description' => 'nullable',
+        ]);
+
+        return ClothingItem::create($request->all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function show(ClothingItem $clothingItem) {
+        return $clothingItem;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ClothingItem $clothingItem)
-    {
-        //
+    public function update(Request $request, ClothingItem $clothingItem) {
+        $clothingItem->update($request->all());
+        return $clothingItem;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ClothingItem $clothingItem)
+    public function destroy($id)
     {
-        //
+        $clothingItem = ClothingItem::findOrFail($id);
+        $clothingItem->delete();
+        return response()->json(['message' => 'Clothing item deleted successfully']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ClothingItem $clothingItem)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ClothingItem $clothingItem)
-    {
-        //
-    }
 }
